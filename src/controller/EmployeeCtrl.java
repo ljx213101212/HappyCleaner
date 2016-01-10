@@ -33,7 +33,7 @@ public class EmployeeCtrl {
 				String jobTitle = (String) inputJson.get(Key.JOBTITLE);
 				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
 				Date joinDate = Config.SDF.parse((String) inputJson.get(Key.JOINDATE));
-				String photo = (String) inputJson.get(Key.PHOTO);
+//				String photo = (String) inputJson.get(Key.PHOTO);
 				String workingType = (String) inputJson.get(Key.WORKINGTYPE);
 				String passType = (String) inputJson.get(Key.PASSTYPE);
 				String passNo = (String) inputJson.get(Key.PASSNO);
@@ -105,7 +105,7 @@ public class EmployeeCtrl {
 				String jobTitle = (String) inputJson.get(Key.JOBTITLE);
 				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
 				Date joinDate = Config.SDF.parse((String) inputJson.get(Key.JOINDATE));
-				String photo = (String) inputJson.get(Key.PHOTO);
+//				String photo = (String) inputJson.get(Key.PHOTO);
 				String workingType = (String) inputJson.get(Key.WORKINGTYPE);
 				String passType = (String) inputJson.get(Key.PASSTYPE);
 				String passNo = (String) inputJson.get(Key.PASSNO);
@@ -117,7 +117,7 @@ public class EmployeeCtrl {
 				employee.setJobTitle(jobTitle);
 				employee.setDateOfBirth(dateOfBirth);
 				employee.setJoinDate(joinDate);
-				employee.setPhoto(photo);
+//				employee.setPhoto(photo);
 				employee.setWorkingType(workingType);
 				employee.setPassType(passType);
 				employee.setPassNo(passNo);
@@ -182,48 +182,25 @@ public class EmployeeCtrl {
 //		return returnJson;
 //	}
 //	
-//	// Get employee by employee nric
-//	public static JSONObject getEmployeeByNric(JSONObject inputJson) {
-//		JSONObject returnJson = new JSONObject();
-//		try {
-//			String nric = (String) inputJson.get(Key.EMPLOYEENRIC);
-//			Employee employee = EmployeeDAO.getEmployeeByNric(nric);
-//			if (employee != null) {
-//				returnJson.put(Key.STATUS, Value.SUCCESS);
-//				returnJson.put(Key.MESSAGE, employee.toJson());
-//			} else {
-//				returnJson.put(Key.STATUS, Value.FAIL);
-//				returnJson.put(Key.MESSAGE, Message.EMPLOYEENOTEXIST);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			returnJson.put(Key.STATUS, Value.FAIL);
-//			returnJson.put(Key.MESSAGE, e);
-//		}
-//		return returnJson;
-//	}
+	// Get employee by employee pass number
+	public static JSONObject getEmployeeByPassNo(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String nric = (String) inputJson.get(Key.PASSNO);
+			Employee employee = EmployeeDAO.getEmployeeByPassNo(nric);
+			if (employee != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, employee.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.EMPLOYEENOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 	
-	// Get employees by admin
-//	public static JSONObject getEmployeesByAdmin(JSONObject inputJson) {
-//		JSONObject returnJson = new JSONObject();
-//		try {
-//			Admin admin = AdminDAO.getAdminById((long) inputJson.get(Key.ADMINID));
-//			if (admin != null) {
-//				JSONArray employeeArr = new JSONArray();
-//				for(Employee p : EmployeeDAO.getEmployeesByAdmin(admin)){
-//					employeeArr.add(p.toJson());
-//				}
-//				returnJson.put(Key.STATUS, Value.SUCCESS);
-//				returnJson.put(Key.MESSAGE, employeeArr);
-//			} else {
-//				returnJson.put(Key.STATUS, Value.FAIL);
-//				returnJson.put(Key.MESSAGE, Message.ADMINNOTEXIST);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			returnJson.put(Key.STATUS, Value.FAIL);
-//			returnJson.put(Key.MESSAGE, e);
-//		}
-//		return returnJson;
-//	}
 }

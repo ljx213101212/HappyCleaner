@@ -40,16 +40,16 @@ public class EmployeeDAO {
 	}
 
 	// features
-	public static Employee getEmployeeByName(String name) {
+	public static Employee getEmployeeByPassNo(String passNo) {
 		Employee employee = null;
 		Employee tempEmployee = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Employee.class);
-		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
+		detachedCriteria.add(Restrictions.eq(Key.PASSNO, passNo));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
 			tempEmployee = (Employee) o;
-			if (tempEmployee.getName().equals(name)) {
+			if (tempEmployee.getName().equals(passNo)) {
 				employee = tempEmployee;
 				break;
 			}
